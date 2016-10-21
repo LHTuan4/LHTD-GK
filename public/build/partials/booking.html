@@ -1,0 +1,127 @@
+<h2><span class="glyphicon glyphicon-plane"></span>Find your flight</h2>
+<form ng-submit="searchBtt()">  
+  <div class="row">
+  	<div class="col-md-4 col-sm-offset-1">
+      <div class="input-group">
+        <span class="input-group-addon"><strong>From</strong></span>
+      	<select ng-model="fromLoc" class="form-control" required>
+      		<optgroup ng-repeat="(region, locations) in groupedLocation" label="{{region}}">
+        		<option ng-repeat="location in locations" value="{{location.name}}">{{location.name}}</option>
+      		</optgroup>
+    	  </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+    	<div class="input-group">
+        <span class="input-group-addon"><strong>To</strong></span>
+        <select ng-model="toLoc" class="form-control" required>
+          <optgroup ng-repeat="(region, locations) in groupedLocation" label="{{region}}">
+            <option ng-repeat="location in locations" value="{{location.name}}">{{location.name}}</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+  <h3></h3>
+  <div class="row">
+  	<div class="col-md-4 col-sm-offset-1">
+      <div class="input-group">
+        <span class="input-group-addon"><strong>Depart</strong></span>    
+        <input type="date" class="form-control" ng-model="departDay" required>
+      </div> 
+  	</div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-addon"><strong>Return</strong></span>    
+        <input type="date" class="form-control" ng-model="returnDay">
+      </div>
+    </div>
+  </div>
+  <h3></h3>
+  <div class="row">
+    <div class="col-md-2 col-sm-offset-1">
+     <div class="input-group">
+        <span class="input-group-addon"><strong>Adult</strong></span>
+        <input class="form-control" type="number" required>
+      </div>
+    </div>
+    <div class="col-md-2">
+     <div class="input-group">
+        <span class="input-group-addon"><strong>Senior</strong></span>
+        <input class="form-control" type="number" required>
+      </div>
+    </div>
+    <div class="col-md-2">
+     <div class="input-group">
+        <span class="input-group-addon"><strong>Child</strong></span>
+        <input class="form-control" type="number" required>
+      </div>
+    </div>
+    <div class="col-md-2">
+     <div class="input-group">
+        <span class="input-group-addon" ><strong>Type</strong></span>
+        <select class="form-control" required>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <h3></h3>
+  <div class="row">
+    <div class="col-sm-offset-4">
+      <button action="submit" class="btn btn-warning btn-lg ">Search Now</button>
+    </div>
+  </div>
+</form>
+<h3>Depart result list</h3>
+<table class="table table-hover"> 
+  <thead>
+    <th>ID</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Chair</th>
+    <th>Price</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="flight in depFlights | filter:filterItem">
+      <td>{{flight.id}}</td>
+      <td>{{flight.from}}</td>
+      <td>{{flight.to}}</td>
+      <td>{{flight.date}}</td>
+      <td>{{flight.time}}</td>
+      <td>{{flight.chair}}</td>
+      <td>{{flight.price}}</td>
+      <td><input type="checkbox"></td> 
+    </tr>
+  </tbody>
+</table>
+<h3>Return result list</h3>
+<table class="table table-hover">
+  <thead>
+    <th>ID</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Chair</th>
+    <th>Price</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="flight in retFlights | filter:filterItem">
+      <td>{{flight.id}}</td>
+      <td>{{flight.from}}</td>
+      <td>{{flight.to}}</td>
+      <td>{{flight.date}}</td>
+      <td>{{flight.time}}</td>
+      <td>{{flight.chair}}</td>
+      <td>{{flight.price}}</td>
+      <td><input type="checkbox"></td> 
+    </tr>
+  </tbody>
+</table>
