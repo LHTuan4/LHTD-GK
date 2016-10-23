@@ -3,7 +3,15 @@ var Flight = require('../models/Flight'),
 	flightRouter = express.Router();
 
 flightRouter.get("/",function (req, res, next) {
-	Flight.find({}, function(err, results){
+	console.log(req.query.date);
+	var query = {};
+	if(req.query.from)
+		query.from = req.query.from;
+	if(req.query.to)
+		query.to = req.query.to;
+	if(req.query.date)
+		query.date = Date.parse(req.query.date);
+	Flight.find(query, function(err, results){
 		if (err)
 			return res.status(500).end("Cant find Flight");
 		res.status(200).json(results);
