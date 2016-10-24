@@ -12,7 +12,6 @@ passengerRouter.get("/",function (req, res, next) {
 
 passengerRouter.post("/",function (req, res, next) {
 	var passenger = new Passenger({
-		id: req.body.id,
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		address: req.body.address,
@@ -20,7 +19,7 @@ passengerRouter.post("/",function (req, res, next) {
 		flightID: req.body.flightID,
 	})
 
-	location.save(function (err){
+	passenger.save(function (err){
 		if(err)
 			return res.status(500).end("Cant add Passenger");
 		res.end("Success");

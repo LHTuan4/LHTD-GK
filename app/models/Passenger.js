@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
-	id: String,
 	firstName: String,
 	lastName: String,
 	address: String,
