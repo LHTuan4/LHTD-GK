@@ -6,7 +6,7 @@ var schema = mongoose.Schema({
 	address: String,
 	telephoneNumber: String,
 	flightID: String,
-	paynment: Number,
+	payment: Number,
 });
 
 var Passenger = mongoose.model('Passenger', schema);
