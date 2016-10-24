@@ -1,5 +1,12 @@
 <h2><span class="glyphicon glyphicon-plane"></span>Find your flight</h2>
-<form ng-submit="searchBtt()">  
+<form ng-submit="searchBtt()">
+  <label class="radio-inline col-sm-offset-1 col-md-2">
+    <input type="radio" name="inlineRadioOptions" ng-click="ShowRetDay('N')" value="option1" checked> One way
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="inlineRadioOptions" ng-click="ShowRetDay('Y')" value="option2"> Round trip
+  </label>
+  <h3></h3>
   <div class="row">
   	<div class="col-md-4 col-sm-offset-1">
       <div class="input-group">
@@ -30,7 +37,7 @@
         <input type="date" class="form-control" ng-model="departDay" required>
       </div> 
   	</div>
-    <div class="col-md-4">
+    <div class="col-md-4" ng-show="isVisible">
       <div class="input-group">
         <span class="input-group-addon"><strong>Return</strong></span>    
         <input type="date" class="form-control" ng-model="returnDay">
@@ -40,88 +47,388 @@
   <h3></h3>
   <div class="row">
     <div class="col-md-2 col-sm-offset-1">
-     <div class="input-group">
+      <div class="input-group">
         <span class="input-group-addon"><strong>Adult</strong></span>
-        <input class="form-control" type="number" required>
+        <input class="form-control" type="number" ng-model="adult" required>
       </div>
     </div>
     <div class="col-md-2">
      <div class="input-group">
         <span class="input-group-addon"><strong>Senior</strong></span>
-        <input class="form-control" type="number" required>
+        <input class="form-control" type="number" ng-model="senior" required>
       </div>
     </div>
     <div class="col-md-2">
      <div class="input-group">
         <span class="input-group-addon"><strong>Child</strong></span>
-        <input class="form-control" type="number" required>
+        <input class="form-control" type="number" ng-model="child" required>
       </div>
     </div>
     <div class="col-md-2">
      <div class="input-group">
         <span class="input-group-addon" ><strong>Type</strong></span>
-        <select class="form-control" required>
-            <option>A</option>
-            <option>B</option>
+        <select class="form-control" ng-model="type" required>
+            <option>Y</option>
             <option>C</option>
         </select>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-offset-5">
+        <p>75% price of Adult's Ticket</p>
+    </div>
+  </div>
   <h3></h3>
   <div class="row">
     <div class="col-sm-offset-4">
-      <button action="submit" class="btn btn-warning btn-lg ">Search Now</button>
+      <button action="submit" class="btn btn-warning btn-lg">Search Now</button>
     </div>
   </div>
 </form>
-<h3>Depart result list</h3>
-<table class="table table-hover"> 
-  <thead>
-    <th>ID</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Chair</th>
-    <th>Price</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <tr ng-repeat="flight in depFlights | filter:filterItem">
-      <td>{{flight.id}}</td>
-      <td>{{flight.from}}</td>
-      <td>{{flight.to}}</td>
-      <td>{{flight.date}}</td>
-      <td>{{flight.time}}</td>
-      <td>{{flight.chair}}</td>
-      <td>{{flight.price}}</td>
-      <td><input type="checkbox"></td> 
-    </tr>
-  </tbody>
-</table>
-<h3>Return result list</h3>
-<table class="table table-hover">
-  <thead>
-    <th>ID</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Chair</th>
-    <th>Price</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <tr ng-repeat="flight in retFlights | filter:filterItem">
-      <td>{{flight.id}}</td>
-      <td>{{flight.from}}</td>
-      <td>{{flight.to}}</td>
-      <td>{{flight.date}}</td>
-      <td>{{flight.time}}</td>
-      <td>{{flight.chair}}</td>
-      <td>{{flight.price}}</td>
-      <td><input type="checkbox"></td> 
-    </tr>
-  </tbody>
-</table>
+<form ng-submit="nextStep()">
+  <h3>Depart result list</h3>
+  <table class="table table-hover"> 
+    <thead>
+      <th>ID</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Chair</th>
+      <th>Price</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="flight in depFlights | filter:filterItem">
+        <td>{{flight.id}}</td>
+        <td>{{flight.from}}</td>
+        <td>{{flight.to}}</td>
+        <td>{{flight.date}}</td>
+        <td>{{flight.time}}</td>
+        <td>{{flight.chair}}</td>
+        <td>{{flight.price}}</td>
+        <td><input type="radio" name="optradio" ng-click="flightInfo1(flight.id, flight.time, flight.price)"></td> 
+      </tr>
+    </tbody>
+  </table>
+  <div ng-show="isVisible">
+    <h3>Return result list</h3>
+    <table class="table table-hover">
+      <thead>
+        <th>ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Chair</th>
+        <th>Price</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="flight in retFlights | filter:filterItem">
+          <td>{{flight.id}}</td>
+          <td>{{flight.from}}</td>
+          <td>{{flight.to}}</td>
+          <td>{{flight.date}}</td>
+          <td>{{flight.time}}</td>
+          <td>{{flight.chair}}</td>
+          <td>{{flight.price}}</td>
+          <td><input type="radio" name="optradio2" ng-click="flightInfo2(flight.id, flight.time, flight.price)"></td> 
+        </tr>
+      </tbody>
+    </table>
+    <h3></h3>
+  </div>
+  <div ng-show="passTab1">
+    <h3>Passenger Infomation</h3>
+    <div class="row">
+        <div class="col-md-4 col-sm-offset-1">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>First Name</strong></span>
+            <input class="form-control" type="text" ng-model="firstNameInput1" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Last Name</strong></span>
+            <input class="form-control" type="text" ng-model="lastNameInput1" required>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Address</strong></span>
+          <input class="form-control" type="text" ng-model="addressInput1" required>
+        </div>
+      </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+        <div class="col-md-8 col-sm-offset-1">       
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Telephone Number</strong></span>
+            <input class="form-control" type="number" ng-model="telInput1" required>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+    <div class="col-sm-offset-4">
+      <button class="btn btn-warning btn-lg" action="submit">Next step</button>
+    </div>
+  </div>  
+<!--     <div ng-show="passTab2">
+    <h3>Passenger Infomation</h3>
+    <div class="row">
+        <div class="col-md-4 col-sm-offset-1">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>First Name</strong></span>
+            <input class="form-control" type="text" ng-model="firstNameInput2" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Last Name</strong></span>
+            <input class="form-control" type="text" ng-model="lastNameInput2" required>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Address</strong></span>
+          <input class="form-control" type="text" ng-model="addressInput2" required>
+        </div>
+      </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+        <div class="col-md-8 col-sm-offset-1">       
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Telephone Number</strong></span>
+            <input class="form-control" type="number" ng-model="telInput2" required>
+          </div>
+        </div>
+    </div>
+    <h3></h3>    
+  </div> -->
+  <h3></h3>
+</form>
+<div ng-show="showComplete">
+  <h3>Your booking result</h3>
+  <div class="resultTable">
+    <div class="row">
+      <div class="col-md-4 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>First Name</strong></span>
+          <input class="form-control" type="text" ng-model="firstNameResult1" disabled>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Last Name</strong></span>
+          <input class="form-control" type="text" ng-model="lastNameResult1" disabled>
+        </div>
+      </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Address</strong></span>
+          <input class="form-control" type="text" ng-model="addressResult1" disabled>
+        </div>
+      </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+        <div class="col-md-8 col-sm-offset-1">       
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Telephone Number</strong></span>
+            <input class="form-control" type="number" ng-model="telResult1" disabled>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+        <div class="col-md-4 col-sm-offset-1">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>From</strong></span>
+            <input class="form-control" type="text" ng-model="fromLocResult1" disabled>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>To</strong></span>
+            <input class="form-control" type="text" ng-model="toLocResult1" disabled>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+        <div class="col-md-4 col-sm-offset-1">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Date</strong></span>
+            <input class="form-control" type="text" ng-model="departDayResult1" disabled>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Time</strong></span>
+            <input class="form-control" type="text" ng-model="timeResult1" disabled>
+          </div>
+        </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+      <div class="col-md-2 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Adult</strong></span>
+          <input class="form-control" type="number" ng-model="adultResult1" disabled>
+        </div>
+      </div>
+      <div class="col-md-2">
+       <div class="input-group">
+          <span class="input-group-addon"><strong>Senior</strong></span>
+          <input class="form-control" type="number" ng-model="seniorResult1" disabled>
+        </div>
+      </div>
+      <div class="col-md-2">
+       <div class="input-group">
+          <span class="input-group-addon"><strong>Child</strong></span>
+          <input class="form-control" type="number" ng-model="childResult1" disabled>
+        </div>
+      </div>
+      <div class="col-md-2">
+       <div class="input-group">
+          <span class="input-group-addon"><strong>Chair Type</strong></span>
+          <input class="form-control" type="text" ng-model="typeResult1" disabled>
+        </div>
+      </div>
+    </div>
+    <h3></h3>
+    <div class="row">
+      <div class="col-md-4 col-sm-offset-3">
+        <div class="input-group">
+          <span class="input-group-addon"><strong>Total</strong></span>
+          <input class="form-control" ng-model="total1" type="number" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3></h3>
+  <div ng-show="isVisible">
+    <div class="resultTable">
+      <div class="row">
+            <div class="col-md-4 col-sm-offset-1">
+              <div class="input-group">
+                <span class="input-group-addon"><strong>First Name</strong></span>
+                <input class="form-control" type="text" ng-model="firstNameResult1" disabled>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon"><strong>Last Name</strong></span>
+                <input class="form-control" type="text" ng-model="lastNameResult1" disabled>
+              </div>
+            </div>
+        </div>
+        <h3></h3>
+        <div class="row">
+          <div class="col-md-8 col-sm-offset-1">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>Address</strong></span>
+              <input class="form-control" type="text" ng-model="addressResult1" disabled>
+            </div>
+          </div>
+        </div>
+        <h3></h3>
+        <div class="row">
+            <div class="col-md-8 col-sm-offset-1">       
+              <div class="input-group">
+                <span class="input-group-addon"><strong>Telephone Number</strong></span>
+                <input class="form-control" type="number" ng-model="telResult1" disabled>
+              </div>
+            </div>
+        </div>
+        <h3></h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-offset-1">
+              <div class="input-group">
+                <span class="input-group-addon"><strong>From</strong></span>
+                <input class="form-control" type="text" ng-model="fromLocResult2" disabled>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon"><strong>To</strong></span>
+                <input class="form-control" type="text" ng-model="toLocResult2" disabled>
+              </div>
+            </div>
+        </div>
+        <h3></h3>
+        <div ng-model="isReturn">
+          <div class="row">
+              <div class="col-md-4 col-sm-offset-1">
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Date</strong></span>
+                  <input class="form-control" type="text" ng-model="departDayResult2" disabled>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Time</strong></span>
+                  <input class="form-control" type="text" ng-model="timeResult2" disabled>
+                </div>
+              </div>
+          </div>
+          <h3></h3>
+        <div class="row">
+          <div class="col-md-2 col-sm-offset-1">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>Adult</strong></span>
+              <input class="form-control" type="number" ng-model="adultResult1" disabled>
+            </div>
+          </div>
+          <div class="col-md-2">
+           <div class="input-group">
+              <span class="input-group-addon"><strong>Senior</strong></span>
+              <input class="form-control" type="number" ng-model="seniorResult1" disabled>
+            </div>
+          </div>
+          <div class="col-md-2">
+           <div class="input-group">
+              <span class="input-group-addon"><strong>Child</strong></span>
+              <input class="form-control" type="number" ng-model="childResult1" disabled>
+            </div>
+          </div>
+          <div class="col-md-2">
+           <div class="input-group">
+              <span class="input-group-addon"><strong>Chair Type</strong></span>
+              <input class="form-control" type="text" ng-model="typeResult1" disabled>
+            </div>
+          </div>
+        </div>
+        <h3></h3>
+        <div class="row">
+          <div class="col-md-4 col-sm-offset-3">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>Total</strong></span>
+              <input class="form-control" ng-model="total2" type="number" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3></h3>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-4">
+      <button class="btn btn-warning btn-lg">Complete</button>
+    </div>
+  </div>
+</div>
