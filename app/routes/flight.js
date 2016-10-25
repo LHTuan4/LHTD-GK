@@ -37,5 +37,33 @@ flightRouter.post("/",function (req, res, next) {
 		res.end("Success");
 	})
 });
+
+flightRouter.put("/:id",function(req, res, next){
+
+	console.log("ABCDEF", req.params);
+	Flight
+		.findOne( {id: req.params.id})
+		.exec((err, result) => {
+			if(err){	
+				console.log("wrong");
+			}
+		
+			if(!result) return res.status(500).end("Cant find Flight");
+		
+			result.chair -= Number(req.body.chair);
+			if(result.chair<0){
+				return res.status(400).json({message: "needChair"});
+			}
+			else{
+				result.save((err) => {
+				console.log(result);
+				//if(err)
+				return res.end("Success");
+			});
+			}
+			
+		});
+})
+
 module.exports = flightRouter;
 

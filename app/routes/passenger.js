@@ -17,7 +17,7 @@ passengerRouter.post("/",function (req, res, next) {
 		address: req.body.address,
 		telephoneNumber: req.body.telephoneNumber,
 		flightID: req.body.flightID,
-		payment: req.body.paynment,
+		payment: req.body.payment,
 	})
 
 	passenger.save(function (err){

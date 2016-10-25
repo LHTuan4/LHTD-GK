@@ -49,19 +49,19 @@
     <div class="col-md-2 col-sm-offset-1">
       <div class="input-group">
         <span class="input-group-addon"><strong>Adult</strong></span>
-        <input class="form-control" type="number" ng-model="adult" required>
+        <input class="form-control" type="number" min="0" ng-model="adult" required>
       </div>
     </div>
     <div class="col-md-2">
      <div class="input-group">
         <span class="input-group-addon"><strong>Senior</strong></span>
-        <input class="form-control" type="number" ng-model="senior" required>
+        <input class="form-control" type="number" min="0" ng-model="senior" required>
       </div>
     </div>
     <div class="col-md-2">
      <div class="input-group">
         <span class="input-group-addon"><strong>Child</strong></span>
-        <input class="form-control" type="number" ng-model="child" required>
+        <input class="form-control" type="number" min="0" ng-model="child" required>
       </div>
     </div>
     <div class="col-md-2">
@@ -75,9 +75,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 col-sm-offset-5">
+    <div class="col-md-2 col-sm-offset-5">
         <p>75% price of Adult's Ticket</p>
     </div>
+    <p> Price C = 2*Y</p>
   </div>
   <h3></h3>
   <div class="row">
@@ -170,14 +171,15 @@
         <div class="col-md-8 col-sm-offset-1">       
           <div class="input-group">
             <span class="input-group-addon"><strong>Telephone Number</strong></span>
-            <input class="form-control" type="number" ng-model="telInput1" required>
+            <input class="form-control" type="number" min="0" ng-model="telInput1" required>
           </div>
         </div>
     </div>
     <h3></h3>
     <div class="row">
-    <div class="col-sm-offset-4">
-      <button class="btn btn-warning btn-lg" action="submit">Next step</button>
+      <div class="col-sm-offset-4">
+        <button class="btn btn-warning btn-lg" action="submit">Next step</button>
+      </div>
     </div>
   </div>  
 <!--     <div ng-show="passTab2">
@@ -220,7 +222,7 @@
 </form>
 <div ng-show="showComplete">
   <h3>Your booking result</h3>
-  <div class="resultTable">
+  <div class="alert alert-warning">
     <div class="row">
       <div class="col-md-4 col-sm-offset-1">
         <div class="input-group">
@@ -249,7 +251,7 @@
         <div class="col-md-8 col-sm-offset-1">       
           <div class="input-group">
             <span class="input-group-addon"><strong>Telephone Number</strong></span>
-            <input class="form-control" type="number" ng-model="telResult1" disabled>
+            <input class="form-control" type="number" min="0" ng-model="telResult1" disabled>
           </div>
         </div>
     </div>
@@ -305,7 +307,7 @@
       </div>
       <div class="col-md-2">
        <div class="input-group">
-          <span class="input-group-addon"><strong>Chair Type</strong></span>
+          <span class="input-group-addon"><strong>ChairType</strong></span>
           <input class="form-control" type="text" ng-model="typeResult1" disabled>
         </div>
       </div>
@@ -322,71 +324,71 @@
   </div>
   <h3></h3>
   <div ng-show="isVisible">
-    <div class="resultTable">
+    <div class="alert alert-warning">
       <div class="row">
-            <div class="col-md-4 col-sm-offset-1">
-              <div class="input-group">
-                <span class="input-group-addon"><strong>First Name</strong></span>
-                <input class="form-control" type="text" ng-model="firstNameResult1" disabled>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="input-group">
-                <span class="input-group-addon"><strong>Last Name</strong></span>
-                <input class="form-control" type="text" ng-model="lastNameResult1" disabled>
-              </div>
-            </div>
-        </div>
-        <h3></h3>
-        <div class="row">
-          <div class="col-md-8 col-sm-offset-1">
+          <div class="col-md-4 col-sm-offset-1">
             <div class="input-group">
-              <span class="input-group-addon"><strong>Address</strong></span>
-              <input class="form-control" type="text" ng-model="addressResult1" disabled>
+              <span class="input-group-addon"><strong>First Name</strong></span>
+              <input class="form-control" type="text" ng-model="firstNameResult1" disabled>
             </div>
           </div>
-        </div>
-        <h3></h3>
-        <div class="row">
-            <div class="col-md-8 col-sm-offset-1">       
-              <div class="input-group">
-                <span class="input-group-addon"><strong>Telephone Number</strong></span>
-                <input class="form-control" type="number" ng-model="telResult1" disabled>
-              </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>Last Name</strong></span>
+              <input class="form-control" type="text" ng-model="lastNameResult1" disabled>
             </div>
+          </div>
+      </div>
+      <h3></h3>
+      <div class="row">
+        <div class="col-md-8 col-sm-offset-1">
+          <div class="input-group">
+            <span class="input-group-addon"><strong>Address</strong></span>
+            <input class="form-control" type="text" ng-model="addressResult1" disabled>
+          </div>
         </div>
-        <h3></h3>
+      </div>
+      <h3></h3>
+      <div class="row">
+          <div class="col-md-8 col-sm-offset-1">       
+            <div class="input-group">
+              <span class="input-group-addon"><strong>Telephone Number</strong></span>
+              <input class="form-control" type="number" ng-model="telResult1" disabled>
+            </div>
+          </div>
+      </div>
+      <h3></h3>
+      <div class="row">
+          <div class="col-md-4 col-sm-offset-1">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>From</strong></span>
+              <input class="form-control" type="text" ng-model="fromLocResult2" disabled>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><strong>To</strong></span>
+              <input class="form-control" type="text" ng-model="toLocResult2" disabled>
+            </div>
+          </div>
+      </div>
+      <h3></h3>
+      <div ng-model="isReturn">
         <div class="row">
             <div class="col-md-4 col-sm-offset-1">
               <div class="input-group">
-                <span class="input-group-addon"><strong>From</strong></span>
-                <input class="form-control" type="text" ng-model="fromLocResult2" disabled>
+                <span class="input-group-addon"><strong>Date</strong></span>
+                <input class="form-control" type="text" ng-model="departDayResult2" disabled>
               </div>
             </div>
             <div class="col-md-4">
               <div class="input-group">
-                <span class="input-group-addon"><strong>To</strong></span>
-                <input class="form-control" type="text" ng-model="toLocResult2" disabled>
+                <span class="input-group-addon"><strong>Time</strong></span>
+                <input class="form-control" type="text" ng-model="timeResult2" disabled>
               </div>
             </div>
         </div>
         <h3></h3>
-        <div ng-model="isReturn">
-          <div class="row">
-              <div class="col-md-4 col-sm-offset-1">
-                <div class="input-group">
-                  <span class="input-group-addon"><strong>Date</strong></span>
-                  <input class="form-control" type="text" ng-model="departDayResult2" disabled>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon"><strong>Time</strong></span>
-                  <input class="form-control" type="text" ng-model="timeResult2" disabled>
-                </div>
-              </div>
-          </div>
-          <h3></h3>
         <div class="row">
           <div class="col-md-2 col-sm-offset-1">
             <div class="input-group">
@@ -408,7 +410,7 @@
           </div>
           <div class="col-md-2">
            <div class="input-group">
-              <span class="input-group-addon"><strong>Chair Type</strong></span>
+              <span class="input-group-addon"><strong>ChairType</strong></span>
               <input class="form-control" type="text" ng-model="typeResult1" disabled>
             </div>
           </div>

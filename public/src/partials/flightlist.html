@@ -1,5 +1,5 @@
 <h2><span class="glyphicon glyphicon-list-alt"></span> Flight List</h2>
-<input class="form-control" ng-model="filterItem" placeholder="search..">
+<input class="form-control" ng-model="filterItem" placeholder="Search..">
 <table class="table table-hover">
 	<thead>
 		<th>ID</th>
@@ -7,10 +7,7 @@
 		<th>To</th>
 		<th>Date</th>
 		<th>Time</th>
-		<th>Type</th>
-		<th>PriceType</th>
 		<th>Chair</th>
-		<th>Price</th>
 	</thead>
 	<tbody>
 		<tr ng-repeat="flight in flights | filter:filterItem">
@@ -19,10 +16,7 @@
 			<td>{{flight.to}}</td>
 			<td>{{flight.date}}</td>
 			<td>{{flight.time}}</td>
-			<td>{{flight.type}}</td>
-			<td>{{flight.pricetype}}</td>
 			<td>{{flight.chair}}</td>
-			<td>{{flight.price}}</td>
 		</tr>
 	</tbody>
 </table>

@@ -5,6 +5,13 @@ body{
 	background-attachment: fixed;
 	background-size:  cover;
 }
+h1{
+	color: 	#D2691E;
+}
+
+p{
+	color: red;
+}
 .container{
 	background-color: #FFFFFF;
 	width: 80%;
@@ -28,4 +35,11 @@ img{
 	top: 50%; 
 	font-size: 300%;
 	opacity: .9;
+}
+
+.resultTable{
+	border: 2px solid;
+    border-radius: 5px;
+    margin: 10px;
+    position: relative;
 }
